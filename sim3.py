@@ -5,7 +5,7 @@ import os
 import sys
 
 #DISCLAIMER: RUNNING THIS ONE WILL NOT PLAY AFTER 150 TRIALS BECAUSE IT HAS REACHED ITS MAX LIMIT
-#INSTEAD, PLEASE RUN demosim3.py TO see sim3.py in action!!
+#INSTEAD, PLEASE RUN demosim3.py TO see sim3.py in action!! That one doesn't have a trial limit that times out after 150, so it'll run FOREVER.
 
 WIDTH = 800
 HEIGHT = 600
