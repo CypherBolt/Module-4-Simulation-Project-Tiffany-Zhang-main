@@ -1,8 +1,6 @@
 import random
 import pgzrun
 import math
-import os
-import sys
 
 
 WIDTH = 800
@@ -266,9 +264,6 @@ class Cell:
 #create a global list of cells
 cell_count = 50
 
-DATA_FILE = "sim3_data.txt" 
-TRIALS_NEEDED = 150 #collect at least this many trials before stopping
-
 
 def make_cells():
     #builds a fresh batch of cells for a new trial
@@ -286,17 +281,8 @@ def make_cells():
     return new_cells
 
 
-def count_existing_trials():
-    #so re-running the sim resumes instead of overwriting past data
-    if os.path.exists(DATA_FILE):
-        with open(DATA_FILE) as f:
-            return sum(1 for line in f if line.strip())
-    return 0
-
-
 cells = make_cells() #holds every cell both healthy and infected
-frame_count = 0 #frames elapsed in the current trial
-trial_count = count_existing_trials() #trials already recorded in the data file
+frame_count = 0 #frames elapsed in the current demo run
 
 
 def draw():
@@ -306,28 +292,16 @@ def draw():
 
 
 def update():
-    global cells, frame_count, trial_count
-
-    if trial_count >= TRIALS_NEEDED:
-        return #this is because we already have enough data, so we stop simulating
+    global cells, frame_count
 
     frame_count += 1
     for cell in cells:
         cell.move(cells) #each cell moves, bounces, and checks for infection
 
     if all(cell.color == RED for cell in cells):
-        #virus has infected every cell, record how long it took
-        seconds = frame_count / 60 #60 fps
-        with open(DATA_FILE, "a") as f:
-            f.write(f"{seconds}\n")
-
-        trial_count += 1
+        #everyone's infected - just reset and keep the demo looping, no data saved
         frame_count = 0
-        cells = make_cells() #start the next trial automatically
-
-        if trial_count >= TRIALS_NEEDED:
-            print(f"Collected {trial_count} trials. Data saved to {DATA_FILE}.")
-            sys.exit()
+        cells = make_cells()
 
 
 pgzrun.go()
