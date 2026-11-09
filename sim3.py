@@ -5,7 +5,7 @@ import os
 import sys
 
 #DISCLAIMER: RUNNING THIS ONE WILL NOT PLAY AFTER 150 TRIALS BECAUSE IT HAS REACHED ITS MAX LIMIT
-#INSTEAD, PLEASE RUN demosim3.py TO SEE sim3.py in action!!
+#INSTEAD, PLEASE RUN demosim3.py TO see sim3.py in action!!
 
 WIDTH = 800
 HEIGHT = 600
@@ -268,7 +268,7 @@ class Cell:
 #create a global list of cells
 cell_count = 50
 
-DATA_FILE = "sim3_data.txt" 
+DATA_FILE = "demosim3_data.txt" 
 TRIALS_NEEDED = 150 #collect at least this many trials before stopping
 
 
